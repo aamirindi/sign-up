@@ -13,7 +13,6 @@ export default function Signup() {
     async function handleSubmit(e){
 
         e.preventDefault()
-        console.log(emailRef.current.value,passwordRef.current.value)
 
         if(passwordRef.current.value !== passwordConfirmRef.current.value){
             return setError('Passwords do not match')
