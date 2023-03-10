@@ -78,7 +78,9 @@ function App() {
           <label for="chk" aria-hidden="true">
             {" "}
             Sign up{" "}
+            
           </label>
+        
           <input
             className="email"
             placeholder="Email..."

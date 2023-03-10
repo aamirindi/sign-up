@@ -11,15 +11,6 @@ body {
   background: #e0e1e1;
 }
 
-/* CONTAINER */
-
-/* .container{
-  width: 1000px;
-  height: 100%;
-  /* border: 1px solid;
-  background: aquamarine;
-  overflow: auto;
-} */
 
 .App {
   width: 350px;
@@ -53,6 +44,7 @@ label {
   cursor: pointer;
   transition: 0.5 ease-in-out;
 }
+
 
 .email,
 .pass {
