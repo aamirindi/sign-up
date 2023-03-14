@@ -1,12 +1,12 @@
 import React from "react";
 import Signup from "./Signup";
-// import Main from "./Main"
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
     <>
-      {/* <Main /> */}
       <Signup />
+      <Outlet />
     </>
   );
 }

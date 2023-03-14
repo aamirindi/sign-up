@@ -6,10 +6,13 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { auth } from "../firebase-config";
+import { auth, provider } from "../firebase-config";
 import "../sign-up.css";
+import Register from "./Register";
+import img1 from "../assets/google.png";
 
 function App() {
   const [signupEmail, setsignupEmail] = useState("");
@@ -17,9 +20,12 @@ function App() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [type, setType] = useState("password");
+  const [value, setValue] = useState("");
 
   const [user, setUser] = useState({});
 
+
+  // STATUS
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -31,6 +37,18 @@ function App() {
     return () => {
       listen();
     };
+  }, []);
+
+  // SIGN WITH GOOGLE
+
+  const handleClick = () => {
+    signInWithPopup(auth, provider).then((data) => {
+      setValue(data.user.email);
+      localStorage.setItem("email", data.user.email);
+    });
+  };
+  useEffect(() => {
+    setValue(localStorage.getItem("email"));
   }, []);
 
   // SIGN UP
@@ -78,9 +96,8 @@ function App() {
           <label for="chk" aria-hidden="true">
             {" "}
             Sign up{" "}
-            
           </label>
-        
+
           <input
             className="email"
             placeholder="Email..."
@@ -167,6 +184,17 @@ function App() {
           Sign Out{" "}
         </button>
       </div>
+
+      {/* GOOGLE SIGN IN */}
+
+      {value ? (
+        <Register />
+      ) : (
+          <button classname="g-btn" onClick={handleClick}>
+            <img src={img1} alt="" />
+            <span className="g-signin">Sign In With Google</span>
+          </button>
+      )}
     </div>
   );
 }
